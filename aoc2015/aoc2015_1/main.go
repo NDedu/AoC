@@ -24,7 +24,7 @@ func main() {
     inputText = scanner.Text()
   }
 
-  for i := 0; i <len(inputText); i++ {
+  for i := 0; i < len(inputText); i++ {
     if string(inputText[i]) == "(" {
       floor++
     } else if string(inputText[i]) == ")" {
@@ -32,7 +32,7 @@ func main() {
     }
 
     if floor == -1 {
-      fmt.Println("Floors that reached first level of basement: ", i+1)
+      fmt.Println("First levels of basement: ", i+1)
     }
   }
 

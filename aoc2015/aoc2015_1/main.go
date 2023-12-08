@@ -15,27 +15,27 @@ func main() {
   }
   defer file.Close()
   
-  var x string
-  var y int = 0
+  var inputText string
+  var floor int = 0
 
   scanner := bufio.NewScanner(file)
 
   for scanner.Scan() {
-    x = scanner.Text()
+    inputText = scanner.Text()
   }
 
-  for i := 0; i <len(x); i++ {
-    if string(x[i]) == "(" {
-      y++
-    } else if string(x[i]) == ")" {
-      y--
+  for i := 0; i <len(inputText); i++ {
+    if string(inputText[i]) == "(" {
+      floor++
+    } else if string(inputText[i]) == ")" {
+      floor--
     }
 
-    if y == -1 {
-      fmt.Println(i+1)
+    if floor == -1 {
+      fmt.Println("Floors that reached first level of basement: ", i+1)
     }
   }
 
-  fmt.Println(y)
+  fmt.Println("The reached floor is: ", floor)
 
  }

@@ -4,8 +4,9 @@ import (
   "fmt"
   "bufio"
   "log"
-   "os"
+  "os"
   "strings"
+  "sort"
   "strconv"
 )
 
@@ -34,26 +35,14 @@ func calculateRibbon(l int, w int, h int) int {
   
   lengths := []int{l, w, h}
   
-  maxLength := lengths[0]
-
-  for _, length := range lengths {
-
-    if (length > maxLength) {
-      maxLength = length
-    }
-  }
+  sort.Ints(lengths)
 
   var ribbonWrap int = 0
 
-  for i := 0; i < len(lengths); i++ {
-
-    if (lengths[i] == maxLength) {
-      continue
-    }
-
-    ribbonWrap = ribbonWrap + lengths[i]*2
+  for i := 0; i < (len(lengths)-1); i++ {
+    ribbonWrap += lengths[i]*2
   }
-  
+
   var formula int = ribbonWrap + l*w*h 
 
   return formula

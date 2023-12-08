@@ -76,7 +76,7 @@ func main() {
   var totalPackageSize int = 0
   var totalRibbonSize int = 0
 
-  file, err := os.Open("/home/dedu/cod/AoC/aoc2015/aoc2015_2/input.txt")
+  file, err := os.Open("input.txt")
   if err != nil {
     log.Fatal(err)
   }

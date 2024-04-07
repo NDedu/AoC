@@ -1,0 +1,1 @@
+Learning GO, some solutions may not be the most efficient.

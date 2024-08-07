@@ -1,161 +1,159 @@
 package main
 
 import (
-  "fmt"
-  "bufio"
-  "log"
-  "os"
+	"bufio"
+	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
 
-  file, err := os.Open("input.txt")
-  if err != nil {
-    log.Fatal(err)
-  }
+	file, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-  defer file.Close()
+	defer file.Close()
 
-  scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(file)
 
-  var inputText string
+	var inputText string
 
-  for scanner.Scan() {
-    inputText = scanner.Text()
-  }
+	for scanner.Scan() {
+		inputText = scanner.Text()
+	}
 
-  var x int = 0
-  var y int = 0
- 
-  var xCoordinates = make([]int, (len(inputText)+1))
-  var yCoordinates = make([]int, (len(inputText)+1))
+	var x int = 0
+	var y int = 0
 
-  // coordinates of starting house
-  xCoordinates[len(inputText)] = 0
-  yCoordinates[len(inputText)] = 0
+	var xCoordinates = make([]int, (len(inputText) + 1))
+	var yCoordinates = make([]int, (len(inputText) + 1))
 
-  for i := 0; i < len(inputText); i++ {
+	// coordinates of starting house
+	xCoordinates[len(inputText)] = 0
+	yCoordinates[len(inputText)] = 0
 
-    if string(inputText[i]) == ">" {
-      x++
-    } else if string(inputText[i]) == "<" {
-      x--
-    } else if string(inputText[i]) == "^" {
-      y++
-    } else if string(inputText[i]) == "v" {
-      y--
-    }
-    
-    xCoordinates[i] = x
-    yCoordinates[i] = y
-  }
+	for i := 0; i < len(inputText); i++ {
 
-  var uniqueHouses int = len(xCoordinates)
+		if string(inputText[i]) == ">" {
+			x++
+		} else if string(inputText[i]) == "<" {
+			x--
+		} else if string(inputText[i]) == "^" {
+			y++
+		} else if string(inputText[i]) == "v" {
+			y--
+		}
 
-  for i := 0; i <len(xCoordinates); i++ {
+		xCoordinates[i] = x
+		yCoordinates[i] = y
+	}
 
-    isDuplicate := false
+	var uniqueHouses int = len(xCoordinates)
 
-    for j := i; j <len(xCoordinates); j++ {
+	for i := 0; i < len(xCoordinates); i++ {
 
-      if (xCoordinates[i] == xCoordinates[j] && 
-          yCoordinates[i] == yCoordinates[j] && 
-          i != j) {
+		isDuplicate := false
 
-        isDuplicate = true
-      }
-    }
+		for j := i; j < len(xCoordinates); j++ {
 
-    if isDuplicate {
-      uniqueHouses--
-    }
-  }
+			if xCoordinates[i] == xCoordinates[j] &&
+				yCoordinates[i] == yCoordinates[j] &&
+				i != j {
 
-  fmt.Println("Number of houses with at least one present: ", uniqueHouses)
+				isDuplicate = true
+			}
+		}
 
-  // Part2
+		if isDuplicate {
+			uniqueHouses--
+		}
+	}
 
-  var xSanta int = 0
-  var ySanta int = 0
-  var xRobotSanta int = 0
-  var yRobotSanta int = 0
+	fmt.Println("Number of houses with at least one present: ", uniqueHouses)
 
-  var xSantaCoordinates = make([]int, 0)
-  var ySantaCoordinates = make([]int, 0)
- 
-  var xRobotSantaCoordinates = make([]int, 0)
-  var yRobotSantaCoordinates = make([]int, 0)
-  xSantaCoordinates = append(xSantaCoordinates, 0)
-  ySantaCoordinates = append(ySantaCoordinates, 0)
+	// Part2
 
-  xRobotSantaCoordinates = append(xRobotSantaCoordinates, 0)
-  yRobotSantaCoordinates = append(yRobotSantaCoordinates, 0)
+	var xSanta int = 0
+	var ySanta int = 0
+	var xRobotSanta int = 0
+	var yRobotSanta int = 0
 
+	var xSantaCoordinates = make([]int, 0)
+	var ySantaCoordinates = make([]int, 0)
 
-  for i := 0; i < len(inputText); i++ {
+	var xRobotSantaCoordinates = make([]int, 0)
+	var yRobotSantaCoordinates = make([]int, 0)
+	xSantaCoordinates = append(xSantaCoordinates, 0)
+	ySantaCoordinates = append(ySantaCoordinates, 0)
 
-    if i%2 == 0 {
+	xRobotSantaCoordinates = append(xRobotSantaCoordinates, 0)
+	yRobotSantaCoordinates = append(yRobotSantaCoordinates, 0)
 
-     if string(inputText[i]) == ">" {
-        xSanta++
-      } else if string(inputText[i]) == "<" {
-        xSanta--
-      } else if string(inputText[i]) == "^" {
-       ySanta++
-      } else if string(inputText[i]) == "v" {
-        ySanta--
-      }
-    
-      xSantaCoordinates = append(xSantaCoordinates, xSanta)
-      ySantaCoordinates = append(ySantaCoordinates, ySanta)
+	for i := 0; i < len(inputText); i++ {
 
-    } else if i%2 != 0 {
-      
-      if string(inputText[i]) == ">" {
-        xRobotSanta++
-      } else if string(inputText[i]) == "<" {
-        xRobotSanta--
-      } else if string(inputText[i]) == "^" {
-        yRobotSanta++
-      } else if string(inputText[i]) == "v" {
-        yRobotSanta--
-      }
-    
-      xRobotSantaCoordinates = append(xRobotSantaCoordinates, xRobotSanta)
-      yRobotSantaCoordinates = append(yRobotSantaCoordinates, yRobotSanta)
-    }
-  }
+		if i%2 == 0 {
 
-  xVisitedHousesCoordinates := xSantaCoordinates
-  yVisitedHousesCoordinates := ySantaCoordinates
+			if string(inputText[i]) == ">" {
+				xSanta++
+			} else if string(inputText[i]) == "<" {
+				xSanta--
+			} else if string(inputText[i]) == "^" {
+				ySanta++
+			} else if string(inputText[i]) == "v" {
+				ySanta--
+			}
 
-  for i := 0; i < len(xRobotSantaCoordinates); i++ {
+			xSantaCoordinates = append(xSantaCoordinates, xSanta)
+			ySantaCoordinates = append(ySantaCoordinates, ySanta)
 
-    xVisitedHousesCoordinates = append(xVisitedHousesCoordinates, xRobotSantaCoordinates[i])
-    yVisitedHousesCoordinates = append(yVisitedHousesCoordinates, yRobotSantaCoordinates[i])
-  }
-  
-  var combinedUniqueVisitedHouses int = len(xVisitedHousesCoordinates)
+		} else if i%2 != 0 {
 
+			if string(inputText[i]) == ">" {
+				xRobotSanta++
+			} else if string(inputText[i]) == "<" {
+				xRobotSanta--
+			} else if string(inputText[i]) == "^" {
+				yRobotSanta++
+			} else if string(inputText[i]) == "v" {
+				yRobotSanta--
+			}
 
-  for i := 0; i <len(xVisitedHousesCoordinates); i++ {
+			xRobotSantaCoordinates = append(xRobotSantaCoordinates, xRobotSanta)
+			yRobotSantaCoordinates = append(yRobotSantaCoordinates, yRobotSanta)
+		}
+	}
 
-    isDuplicate := false
+	xVisitedHousesCoordinates := xSantaCoordinates
+	yVisitedHousesCoordinates := ySantaCoordinates
 
-    for j := i; j <len(xVisitedHousesCoordinates); j++ {
+	for i := 0; i < len(xRobotSantaCoordinates); i++ {
 
-      if (xVisitedHousesCoordinates[i] == xVisitedHousesCoordinates[j] && 
-          yVisitedHousesCoordinates[i] == yVisitedHousesCoordinates[j] && 
-          i != j) {
+		xVisitedHousesCoordinates = append(xVisitedHousesCoordinates, xRobotSantaCoordinates[i])
+		yVisitedHousesCoordinates = append(yVisitedHousesCoordinates, yRobotSantaCoordinates[i])
+	}
 
-        isDuplicate = true
-      }
-    }
+	var combinedUniqueVisitedHouses int = len(xVisitedHousesCoordinates)
 
-    if isDuplicate {
-      combinedUniqueVisitedHouses--
-    }
-  }
- 
-  fmt.Println("Santa and Robot Santa visited a number of unique houses: ", combinedUniqueVisitedHouses)
+	for i := 0; i < len(xVisitedHousesCoordinates); i++ {
+
+		isDuplicate := false
+
+		for j := i; j < len(xVisitedHousesCoordinates); j++ {
+
+			if xVisitedHousesCoordinates[i] == xVisitedHousesCoordinates[j] &&
+				yVisitedHousesCoordinates[i] == yVisitedHousesCoordinates[j] &&
+				i != j {
+
+				isDuplicate = true
+			}
+		}
+
+		if isDuplicate {
+			combinedUniqueVisitedHouses--
+		}
+	}
+
+	fmt.Println("Santa and Robot Santa visited a number of unique houses: ", combinedUniqueVisitedHouses)
 }

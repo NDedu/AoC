@@ -1,42 +1,42 @@
 package main
 
 import (
-  "fmt"
-  "bufio"
-  "log"
-  "os"
+	"bufio"
+	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
 
-  file, err := os.Open("input.txt")
-  if err != nil {
-    log.Fatal(err)
-  }
+	file, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-  defer file.Close()
-  
-  var inputText string
-  var floor int = 0
+	defer file.Close()
 
-  scanner := bufio.NewScanner(file)
+	var inputText string
+	var floor int = 0
 
-  for scanner.Scan() {
-    inputText = scanner.Text()
-  }
+	scanner := bufio.NewScanner(file)
 
-  for i := 0; i < len(inputText); i++ {
-    if string(inputText[i]) == "(" {
-      floor++
-    } else if string(inputText[i]) == ")" {
-      floor--
-    }
+	for scanner.Scan() {
+		inputText = scanner.Text()
+	}
 
-    if floor == -1 {
-      fmt.Println("First levels of basement: ", i+1)
-    }
-  }
+	for i := 0; i < len(inputText); i++ {
+		if string(inputText[i]) == "(" {
+			floor++
+		} else if string(inputText[i]) == ")" {
+			floor--
+		}
 
-  fmt.Println("The reached floor is: ", floor)
+		if floor == -1 {
+			fmt.Println("First levels of basement: ", i+1)
+		}
+	}
 
- }
+	fmt.Println("The reached floor is: ", floor)
+
+}

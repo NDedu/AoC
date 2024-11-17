@@ -2,8 +2,10 @@ package go_utils
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 )
 
@@ -48,9 +50,16 @@ func StringToBool(str string) (bool, error) {
 	return boolean, nil
 }
 
-func ReadFileLines(filepath string) ([]string, error) {
+func ReadFileLines(filePath string) ([]string, error) {
 
-	file, err := os.Open(filepath)
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+
+		log.Printf("Could not find path: %v", err)
+		return nil, err
+	}
+
+	file, err := os.Open(absPath)
 	if err != nil {
 
 		log.Printf("Failed to open file: %v", err)
@@ -75,9 +84,16 @@ func ReadFileLines(filepath string) ([]string, error) {
 	return lines, nil
 }
 
-func ReadFileToString(filepath string) (string, error) {
+func ReadFileToString(filePath string) (string, error) {
 
-	file, err := os.ReadFile(filepath)
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+
+		log.Printf("Could not find path: %v", err)
+		return "", err
+	}
+
+	file, err := os.ReadFile(absPath)
 	if err != nil {
 
 		log.Printf("Failed to read file: %v", err)
@@ -85,4 +101,23 @@ func ReadFileToString(filepath string) (string, error) {
 	}
 
 	return string(file), nil
+}
+
+func WriteToFileCheck(filePath string, content string) {
+
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+
+		log.Printf("Could not find path: %v", err)
+		return
+	}
+
+	writeError := os.WriteFile(absPath, []byte(content), 0644)
+	if writeError != nil {
+
+		log.Printf("Failed to write to file: %v", writeError)
+		return
+	}
+
+	fmt.Println("Successfully wrote to the result to file")
 }

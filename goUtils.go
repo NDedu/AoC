@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 func StringToInt(str string) (int, error) {
@@ -103,7 +104,7 @@ func ReadFileToString(filePath string) (string, error) {
 	return string(file), nil
 }
 
-func WriteToFileCheck(filePath string, content string) {
+func WriteToFile(filePath string, content string) {
 
 	absPath, err := filepath.Abs(filePath)
 	if err != nil {
@@ -120,4 +121,62 @@ func WriteToFileCheck(filePath string, content string) {
 	}
 
 	fmt.Println("Successfully wrote to the result to file")
+}
+
+func WriteToFileAtLine(filePath string, content string, lineNum int) error {
+
+	if lineNum < 1 {
+
+		log.Printf("Line number must be greater than 1")
+		return nil
+	}
+
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+
+		log.Printf("Could not find path: %v", err)
+		return err
+	}
+
+	file, err := os.Open(absPath)
+	if err != nil {
+
+		log.Printf("Failed to open file to write: %v", err)
+		return err
+	}
+	defer file.Close()
+
+	var lines []string
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+
+		lines = append(lines, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+
+		return err
+	}
+
+	for len(lines) < lineNum - 1 {
+
+		lines = append(lines, "")
+	}
+
+	if lineNum <= len(lines) {
+
+		lines[lineNum - 1] = content
+
+	} else {
+
+		lines = append(lines, content)
+	}
+
+	output := strings.Join(lines, "\n")
+	if len(lines) > 0 {
+
+		output += "\n"
+	}
+
+	return os.WriteFile(absPath, []byte(output), 0644)
 }

@@ -1,8 +1,8 @@
-package day1
+package main
 
 import "fmt"
 
-func Day1() {
+func main() {
 
 	fmt.Println("Start 2016")
 }

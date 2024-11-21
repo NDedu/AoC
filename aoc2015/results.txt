@@ -1,2 +1,4 @@
-Day 1 - Part 1: Santa's floor is 280
-Day 1 - Part 2: Santa first time basement 1797
+Day 1 - Part 1: Santa's floor is: 280
+Day 1 - Part 2: Santa first time basement: 1797
+Day 2 - Part 1: Total wrapping paper needed: 1588178
+Day 2 - Part 2: Total ribbon needed: 3783758

@@ -4,10 +4,12 @@ import (
 	goUtils "AoC"
 )
 
-func main() { 
+func main() {
 
 	file, err := goUtils.ReadFileToString("../input/day1.txt")
-	if err != nil { return }
+	if err != nil {
+		return
+	}
 
 	var floor int
 	var position int
@@ -18,7 +20,7 @@ func main() {
 		if string(character) == "(" {
 
 			floor++
-			position ++
+			position++
 
 		} else if string(character) == ")" {
 

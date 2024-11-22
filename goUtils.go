@@ -158,14 +158,14 @@ func WriteToFileAtLine(filePath string, content string, lineNum int) error {
 		return err
 	}
 
-	for len(lines) < lineNum - 1 {
+	for len(lines) < lineNum-1 {
 
 		lines = append(lines, "")
 	}
 
 	if lineNum <= len(lines) {
 
-		lines[lineNum - 1] = content
+		lines[lineNum-1] = content
 
 	} else {
 

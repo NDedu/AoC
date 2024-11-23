@@ -4,3 +4,5 @@ Day 2 - Part 1: Total wrapping paper needed: 1588178
 Day 2 - Part 2: Total ribbon needed: 3783758
 Day 3 - Part 1: Santa delivers presents to 2081 houses
 Day 3 - Part 2: Santa and the robot delivers presents to 2341 houses
+Day 4 - Part 1: The number where the hash starts with 5 zeroes is 346386
+Day 4 - Part 2: The number where the hash starts with 6 zeroes is 9958218

@@ -100,8 +100,8 @@ func ReadFileToString(filePath string) (string, error) {
 		log.Printf("Failed to read file: %v", err)
 		return "", err
 	}
-
-	return string(file), nil
+	str := strings.ReplaceAll(string(file), "\n", "")
+	return str, nil
 }
 
 func WriteToFile(filePath string, content string) {

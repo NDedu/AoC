@@ -9,12 +9,9 @@ func duplicateChars(str string) bool {
 
 	for i := range str {
 
-		if i < len(str)-1 {
+		if i < len(str)-1 && str[i] == str[i+1] {
 
-			if str[i] == str[i+1] {
-
-				return true
-			}
+			return true
 		}
 	}
 
@@ -27,12 +24,9 @@ func wrongStrings(str string) bool {
 
 	for i := range str {
 
-		if i < len(str)-1 {
+		if i < len(str)-1 && slices.Contains(wrongString, string(str[i])+string(str[i+1])) {
 
-			if slices.Contains(wrongString, string(str[i])+string(str[i+1])) {
-
-				return true
-			}
+			return true
 		}
 	}
 

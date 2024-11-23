@@ -99,10 +99,7 @@ func duplicateCharsInBetween(str string) bool {
 
 func main() {
 
-	lines, err := goUtils.ReadFileLines("../input/day5.txt")
-	if err != nil {
-		return
-	}
+	lines := goUtils.ReadFileLines("../input/day5.txt")
 
 	var numberNiceStringsP1 int = 0
 	var numberNiceStringsP2 int = 0

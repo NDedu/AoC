@@ -10,16 +10,16 @@ import (
 	"strings"
 )
 
-func StringToInt(str string) (int, error) {
+func StringToInt(str string) int {
 
 	number, err := strconv.Atoi(str)
 	if err != nil {
 
 		log.Printf("Failed to convert string to int: %v", err)
-		return 0, err
+		return 0
 	}
 
-	return number, nil
+	return number
 }
 
 func IntToString(number int) string {
@@ -27,44 +27,44 @@ func IntToString(number int) string {
 	return strconv.Itoa(number)
 }
 
-func StringToFloat(str string) (float64, error) {
+func StringToFloat(str string) float64 {
 
 	number, err := strconv.ParseFloat(str, 64)
 	if err != nil {
 
 		log.Printf("Failed to convert string to float: %v", err)
-		return 0.0, err
+		return 0.0
 	}
 
-	return number, nil
+	return number
 }
 
-func StringToBool(str string) (bool, error) {
+func StringToBool(str string) bool {
 
 	boolean, err := strconv.ParseBool(str)
 	if err != nil {
 
 		log.Printf("Failed to convert string to boolean: %v", err)
-		return false, err
+		return false
 	}
 
-	return boolean, nil
+	return boolean
 }
 
-func ReadFileLines(filePath string) ([]string, error) {
+func ReadFileLines(filePath string) []string {
 
 	absPath, err := filepath.Abs(filePath)
 	if err != nil {
 
 		log.Printf("Could not find path: %v", err)
-		return nil, err
+		return nil
 	}
 
 	file, err := os.Open(absPath)
 	if err != nil {
 
 		log.Printf("Failed to open file: %v", err)
-		return nil, err
+		return nil
 	}
 	defer file.Close()
 
@@ -79,29 +79,29 @@ func ReadFileLines(filePath string) ([]string, error) {
 	if err := scanner.Err(); err != nil {
 
 		log.Printf("Failed to read file: %v", err)
-		return nil, err
+		return nil
 	}
 
-	return lines, nil
+	return lines
 }
 
-func ReadFileToString(filePath string) (string, error) {
+func ReadFileToString(filePath string) string {
 
 	absPath, err := filepath.Abs(filePath)
 	if err != nil {
 
 		log.Printf("Could not find path: %v", err)
-		return "", err
+		return ""
 	}
 
 	file, err := os.ReadFile(absPath)
 	if err != nil {
 
 		log.Printf("Failed to read file: %v", err)
-		return "", err
+		return ""
 	}
 	str := strings.ReplaceAll(string(file), "\n", "")
-	return str, nil
+	return str
 }
 
 func WriteToFile(filePath string, content string) {

@@ -14,10 +14,7 @@ func md5Hash(text string) string {
 
 func main() {
 
-	fileString, err := goUtils.ReadFileToString("../input/day4.txt")
-	if err != nil {
-		return
-	}
+	fileString := goUtils.ReadFileToString("../input/day4.txt")
 
 	var number int = 1
 	for {

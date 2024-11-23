@@ -6,10 +6,7 @@ import (
 
 func main() {
 
-	file, err := goUtils.ReadFileToString("../input/day1.txt")
-	if err != nil {
-		return
-	}
+	file := goUtils.ReadFileToString("../input/day1.txt")
 
 	var floor int
 	var position int

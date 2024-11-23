@@ -26,10 +26,7 @@ func ribbonNeeded(length int, heigth int, width int) int {
 
 func main() {
 
-	lines, err := goUtils.ReadFileLines("../input/day2.txt")
-	if err != nil {
-		return
-	}
+	lines := goUtils.ReadFileLines("../input/day2.txt")
 
 	var totalWrappingPaper int = 0
 	var totalRibbon int = 0
@@ -41,10 +38,7 @@ func main() {
 		sidesSize := strings.Split(line, "x")
 		for _, sideSize := range sidesSize {
 
-			sideSizeInt, err := goUtils.StringToInt(sideSize)
-			if err != nil {
-				return
-			}
+			sideSizeInt := goUtils.StringToInt(sideSize)
 
 			boxSizes = append(boxSizes, sideSizeInt)
 		}

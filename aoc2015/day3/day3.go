@@ -6,10 +6,7 @@ import (
 
 func main() {
 
-	file, err := goUtils.ReadFileToString("../input/day3.txt")
-	if err != nil {
-		return
-	}
+	file := goUtils.ReadFileToString("../input/day3.txt")
 
 	uniqueHouses := make(map[string]struct{})
 	var xPosition int = 0

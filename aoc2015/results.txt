@@ -8,3 +8,5 @@ Day 4 - Part 1: The number where the hash starts with 5 zeroes is 346386
 Day 4 - Part 2: The number where the hash starts with 6 zeroes is 9958218
 Day 5 - Part 1: Number of nice strings 255
 Day 5 - Part 2: Number of nice strings 55
+Day 6 - Part 1: Number of open lights: 400410
+Day 6 - Part 2: Total brightness: 15343601

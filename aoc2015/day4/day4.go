@@ -20,7 +20,12 @@ func main() {
 	for {
 
 		md5 := md5Hash(fileString + goUtils.IntToString(number))
-		if string(md5[0]) == "0" && string(md5[1]) == "0" && string(md5[2]) == "0" && string(md5[3]) == "0" && string(md5[4]) == "0" {
+		if string(md5[0]) == "0" && 
+			string(md5[1]) == "0" && 
+			string(md5[2]) == "0" && 
+			string(md5[3]) == "0" && 
+			string(md5[4]) == "0" {
+
 			break
 		}
 
@@ -34,7 +39,13 @@ func main() {
 	for {
 
 		md5 := md5Hash(fileString + goUtils.IntToString(number))
-		if string(md5[0]) == "0" && string(md5[1]) == "0" && string(md5[2]) == "0" && string(md5[3]) == "0" && string(md5[4]) == "0" && string(md5[5]) == "0" {
+		if string(md5[0]) == "0" && 
+			string(md5[1]) == "0" && 
+			string(md5[2]) == "0" && 
+			string(md5[3]) == "0" && 
+			string(md5[4]) == "0" && 
+			string(md5[5]) == "0" {
+
 			break
 		}
 

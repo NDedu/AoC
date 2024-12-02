@@ -78,22 +78,64 @@ func main() {
 
 			startCoordinates := strings.Split(words[2], ",")
 			endCoordinates := strings.Split(words[4], ",")
-			gridP1 = switchLights(gridP1, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[1])
-			gridP2 = increaseBright(gridP2, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[1])
+
+			gridP1 = switchLights(
+				gridP1, 
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[1])
+
+			gridP2 = increaseBright(
+				gridP2, 
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[1])
 
 		} else if words[0] == "turn" && words[1] == "off" {
 
 			startCoordinates := strings.Split(words[2], ",")
 			endCoordinates := strings.Split(words[4], ",")
-			gridP1 = switchLights(gridP1, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[1])
-			gridP2 = increaseBright(gridP2, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[1])
+
+			gridP1 = switchLights(
+				gridP1, 
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[1])
+
+			gridP2 = increaseBright(
+				gridP2, 
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[1])
 
 		} else if words[0] == "toggle" {
 
 			startCoordinates := strings.Split(words[1], ",")
 			endCoordinates := strings.Split(words[3], ",")
-			gridP1 = switchLights(gridP1, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[0])
-			gridP2 = increaseBright(gridP2, goUtils.StringToInt(startCoordinates[0]), goUtils.StringToInt(endCoordinates[0]), goUtils.StringToInt(startCoordinates[1]), goUtils.StringToInt(endCoordinates[1]), words[0])
+
+			gridP1 = switchLights(
+				gridP1,
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[0])
+
+			gridP2 = increaseBright(
+				gridP2, 
+				goUtils.StringToInt(startCoordinates[0]), 
+				goUtils.StringToInt(endCoordinates[0]), 
+				goUtils.StringToInt(startCoordinates[1]), 
+				goUtils.StringToInt(endCoordinates[1]), 
+				words[0])
 		}
 	}
 

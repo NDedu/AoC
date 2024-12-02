@@ -9,7 +9,8 @@ func duplicateChars(str string) bool {
 
 	for i := range str {
 
-		if i < len(str)-1 && str[i] == str[i+1] {
+		if i < len(str)-1 && 
+			str[i] == str[i+1] {
 
 			return true
 		}
@@ -24,7 +25,8 @@ func wrongStrings(str string) bool {
 
 	for i := range str {
 
-		if i < len(str)-1 && slices.Contains(wrongString, string(str[i])+string(str[i+1])) {
+		if i < len(str)-1 && 
+			slices.Contains(wrongString, string(str[i])+string(str[i+1])) {
 
 			return true
 		}
@@ -57,7 +59,9 @@ func pairOfLetters(str string) bool {
 	i := 0
 	for i < len(str)-1 {
 
-		if i <= len(str)-3 && str[i] == str[i+1] && str[i] == str[i+2] {
+		if i <= len(str)-3 && 
+			str[i] == str[i+1] && 
+			str[i] == str[i+2] {
 
 			pairOfChars = append(pairOfChars, string(str[i])+string(str[i+1]))
 			i += 2
@@ -88,7 +92,8 @@ func duplicateCharsInBetween(str string) bool {
 
 	for i := range str {
 
-		if i <= len(str)-3 && str[i] == str[i+2] {
+		if i <= len(str)-3 && 
+			str[i] == str[i+2] {
 
 			return true
 		}
@@ -106,12 +111,15 @@ func main() {
 
 	for _, line := range lines {
 
-		if numberOfVowels(line) >= 3 && duplicateChars(line) && !wrongStrings(line) {
+		if numberOfVowels(line) >= 3 && 
+			duplicateChars(line) && 
+			!wrongStrings(line) {
 
 			numberNiceStringsP1++
 		}
 
-		if pairOfLetters(line) && duplicateCharsInBetween(line) {
+		if pairOfLetters(line) && 
+			duplicateCharsInBetween(line) {
 
 			numberNiceStringsP2++
 		}

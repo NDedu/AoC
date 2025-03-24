@@ -1,12 +1,38 @@
 const std = @import("std");
 
+pub fn readFile(allocator: std.mem.Allocator, file_path: []const u8) ![]u8 {
+    // Open the file
+    const file = try std.fs.cwd().openFile(file_path, .{});
+    defer file.close();
+
+    // Get the file size
+    const file_size = try file.getEndPos();
+
+    // Allocate a buffer to hold the entire file
+    var buffer = try allocator.alloc(u8, file_size);
+    _ = &buffer;
+    errdefer allocator.free(buffer);
+
+    // Read the entire file into the buffer
+    const bytes_read = try file.readAll(buffer);
+
+    // Make sure we read the entire file
+    if (bytes_read != file_size) {
+        return error.IncompleteRead;
+    }
+
+    return buffer;
+}
+
 pub fn readLines(allocator: std.mem.Allocator, file_path: []const u8) !std.ArrayList([]u8) {
     // Open the file
     const file = try std.fs.cwd().openFile(file_path, .{});
     defer file.close();
 
     // Create a buffered reader
-    const buf_reader = std.io.bufferedReader(file.reader());
+    var buf_reader = std.io.bufferedReader(file.reader());
+    _ = &buf_reader;
+
     const in_stream = buf_reader.reader();
 
     // Initialize an array list to store lines
@@ -29,32 +55,27 @@ pub fn readLines(allocator: std.mem.Allocator, file_path: []const u8) !std.Array
     return lines;
 }
 
-pub fn readFile(allocator: std.mem.Allocator, file_path: []const u8) ![]u8 {
-    // Open the file
-    const file = try std.fs.cwd().openFile(file_path, .{});
-    defer file.close();
+pub fn printLines(file_path: []const u8) !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    const allocator = gpa.allocator();
+    defer _ = gpa.deinit();
 
-    // Get the file size
-    const file_size = try file.getEndPos();
-
-    // Allocate a buffer to hold the entire file
-    const buffer = try allocator.alloc(u8, file_size);
-    errdefer allocator.free(buffer);
-
-    // Read the entire file into the buffer
-    const bytes_read = try file.readAll(buffer);
-
-    // Make sure we read the entire file
-    if (bytes_read != file_size) {
-        return error.IncompleteRead;
+    var lines = try readLines(allocator, file_path);
+    defer {
+        for (lines.items) |line| {
+            allocator.free(line);
+        }
+        lines.deinit();
     }
 
-    return buffer;
+    for (lines.items, 0..) |line, i| {
+        std.debug.print("Line {d}: {s}\n", .{ i + 1, line });
+    }
 }
 
 pub fn appendToFile(file_path: []const u8, content: []const u8) !void {
     // Open the file in append mode, create if it doesn't exist
-    const file = try std.fs.cwd().createFile(file_path, .{ .truncate = false, .read = false, .exclusive = false });
+    const file = try std.fs.cwd().createFile(file_path, .{ .truncate = false, .read = true, .exclusive = false });
     defer file.close();
 
     // Seek to the end of the file

@@ -7,6 +7,20 @@
 *.dll
 *.so
 *.dylib
+*.out
+*.app
+*.o
+*.obj
+*.a
+*.lib
+
+# Zig build artifacts
+zig-cache/
+zig-out/
+/release/
+/debug/
+/build/
+/build-*/
 
 # Test binary, built with `go test -c`
 *.test
@@ -23,3 +37,10 @@ go.work.sum
 
 # env file
 .env
+
+# Logs
+*.log
+
+# Project specific
+config.local.zig
+secret.zig

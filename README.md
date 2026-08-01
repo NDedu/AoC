@@ -1,2 +1,3 @@
 # AoC
-Trying to solve advent of code.
+
+Trying to solve Advent of Code.

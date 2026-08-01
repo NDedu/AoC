@@ -1,0 +1,18 @@
+const std = @import("std");
+const utils = @import("../utils.zig");
+
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
+
+    const content = try utils.readFile(allocator, "input/{{DAY}}.txt");
+    defer allocator.free(content);
+    utils.printStr(content);
+
+    var lines = try utils.readLines(allocator, "input/{{DAY}}.txt");
+    defer lines.deinit();
+    for (lines.items) |line| {
+        utils.printStr(line);
+    }
+}

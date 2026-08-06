@@ -21,7 +21,7 @@ gow:
 
 # --- C ---
 c:
-	@gcc -O2 -Ic_headers -o /tmp/aoc_c $(FILE) -lm && /tmp/aoc_c
+	@gcc -O2 -Ic_headers -o /tmp/aoc_c $(FILE) -lm && cd $(YEAR) && /tmp/aoc_c
 
 # --- Zig ---
 zig:

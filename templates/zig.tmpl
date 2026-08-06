@@ -6,11 +6,11 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    const content = try utils.readFile(allocator, "input/{{DAY}}.txt");
+    const content = try utils.readFile(allocator, "input/day{{DAY}}.txt");
     defer allocator.free(content);
     utils.printStr(content);
 
-    var lines = try utils.readLines(allocator, "input/{{DAY}}.txt");
+    var lines = try utils.readLines(allocator, "input/day{{DAY}}.txt");
     defer lines.deinit();
     for (lines.items) |line| {
         utils.printStr(line);

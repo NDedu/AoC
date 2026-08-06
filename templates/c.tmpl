@@ -4,7 +4,84 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#define ARENA_IMPLEMENTATION
+#include "arena.h"
+
+#include "c_utils.h"
+
+static Arena arena = {0};
+
+#define uthash_malloc(sz) arena_alloc(&arena, (sz))
+#define uthash_free(ptr, sz) ((void)(ptr), (void)(sz))
+
+#include "uthash.h"
+#include "utarray.h"
+
+typedef struct {
+	const           char *name; // key
+	int             count; // value
+	UT_hash_handle  hh;
+} Entry;
+
 int main() {
+
+	char *content = read_file("input/day{{DAY}}.txt");
+	if (!content) {
+		return 1;
+	}
+	printf("%s\n", content);
+
+	size_t count = 0;
+	char **lines = read_lines("input/day{{DAY}}.txt", &count);
+	if (!lines) {
+		return 1;
+	}
+	for (size_t i = 0; i < count; i++) {
+		printf("%s\n", lines[i]);
+	}
+
+	UT_array *list = NULL;
+	utarray_new(list, &ut_ptr_icd);
+
+	char *first = arena_strdup(&arena, "elf");
+	char *second = arena_strdup(&arena, "reindeer");
+	utarray_push_back(list, &first);
+	utarray_push_back(list, &second);
+
+	printf("list (%u items):\n", utarray_len(list));
+
+	char **it = NULL;
+	while ((it = (char **)utarray_next(list, it)) != NULL) {
+		printf("  %s\n", *it);
+	}
+
+	Entry *map = NULL;
+
+	Entry *entry = (Entry *)arena_alloc(&arena, sizeof(*entry));
+	entry->name = arena_strdup(&arena, "elf");
+	entry->count = 42;
+	HASH_ADD_KEYPTR(hh, map, entry->name, strlen(entry->name), entry); // KEYPTR: key is char*, not char[]
+
+	entry = (Entry *)arena_alloc(&arena, sizeof(*entry));
+	entry->name = arena_strdup(&arena, "reindeer");
+	entry->count = 9;
+	HASH_ADD_KEYPTR(hh, map, entry->name, strlen(entry->name), entry);
+
+	Entry *found = NULL;
+	HASH_FIND_STR(map, "elf", found);
+	printf("lookup elf -> %d\n", found ? found->count : -1);
+
+	printf("map (%u entries):\n", HASH_COUNT(map));
+
+	Entry *cur = NULL, *tmp = NULL;
+	HASH_ITER(hh, map, cur, tmp) {
+		printf("  %s = %d\n", cur->name, cur->count);
+	}
+
+	utarray_free(list);
+	arena_free(&arena);
+    free(content);
+    free_lines(lines);
 
 	return 0;
 }

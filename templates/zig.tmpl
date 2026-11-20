@@ -1,0 +1,13 @@
+const std = @import("std");
+
+pub fn main(init: std.process.Init) !void {
+    const allocator = init.arena.allocator();
+    _ = allocator;
+
+    const input = @embedFile("input/day{{DAY}}.txt");
+
+    var lines = std.mem.tokenizeScalar(u8, input, '\n');
+    while (lines.next()) |line| {
+        std.debug.print("{s}\n", .{line});
+    }
+}

@@ -1,0 +1,86 @@
+# My ignore
+
+# ---> Native build output (C, Odin, Zig, Go)
+*.o
+*.obj
+*.ko
+*.elf
+*.a
+*.lib
+*.la
+*.lo
+*.dll
+*.so
+*.so.*
+*.dylib
+*.exe
+*.exe~
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.ilk
+*.exp
+*.gch
+*.pch
+
+# Prebuilt libraries
+# !third_party/sqlite/sqlite3.lib
+
+# Debug info
+*.pdb
+*.idb
+*.dSYM/
+*.dwo
+*.su
+
+# Build folder: build with `odin build . -out:build/site`
+build/
+# Bare 'web' would ignore cmd/web
+/web
+
+# ---> Odin
+# LLVM IR from -keep-temp-files / -build-mode:llvm-ir
+*.ll
+# core:prof/spall traces
+*.spall
+
+# ---> Zig
+.zig-cache/
+zig-out/
+zig-pkg/
+docgen_tmp/
+
+# ---> Go
+*.test
+coverage.*
+*.coverprofile
+profile.cov
+go.work
+go.work.sum
+# vendor/
+
+# ---> SQLite: the database and its side files (-journal, -wal, -shm)
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+
+# ---> Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---> Logs and profiling
+*.log
+perf.data*
+callgrind.out.*
+vgcore.*
+
+# Advent of Code puzzle inputs (AoC asks not to publish them)
+input/

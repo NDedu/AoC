@@ -15,10 +15,7 @@ main :: proc() {
 	for line in strings.split_lines_iterator(&input) {
 
         seen_p1 := make(map[[2]int]struct{})
-        defer delete(seen_p1)
-
         seen_p2 := make(map[[2]int]struct{})
-        defer delete(seen_p2)
 
         x_y_coordinates_p1 := [2]int{0, 0}
         seen_p1[x_y_coordinates_p1] = {}

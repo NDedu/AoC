@@ -1,0 +1,11 @@
+root = true
+
+[*]
+indent_size = 4
+tab_width = 4
+
+[{*.odin,*.go,*.c,*.h,*.tmpl,Makefile}]
+indent_style = tab
+
+[{*.zig,zig.tmpl}]
+indent_style = space
